@@ -1,15 +1,6 @@
-FROM python:3.11
-
-RUN useradd -m -u 1000 user
-USER user
-ENV HOME=/home/user \
-    PATH=/home/user/.local/bin:$PATH
-WORKDIR $HOME/app
-
-COPY --chown=user requirements.txt .
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
-
-COPY --chown=user . .
-
-EXPOSE 7860
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir instaloader python-telegram-bot flask qrcode[pil] pillow yt-dlp google-generativeai
+COPY . .
 CMD ["python", "app.py"]
