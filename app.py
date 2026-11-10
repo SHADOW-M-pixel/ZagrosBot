@@ -12,7 +12,7 @@ def run_bot():
     # این خط دقیقاً همون کاری رو می‌کنه که main.py میکرد
     main.main()
 
-if name == "__main__":
+if __name__ == "__main__":
     # اجرای ربات در یک ترد جداگانه
     bot_thread = threading.Thread(target=run_bot)
     bot_thread.start()
