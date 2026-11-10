@@ -8,14 +8,14 @@ app = Flask(__name__)
 def home():
     return "Bot Web Server is Running!"
 
-def run_bot():
-    # این خط دقیقاً همون کاری رو می‌کنه که main.py میکرد
-    main.main()
-
-if __name__ == "__main__":
-    # اجرای ربات در یک ترد جداگانه
-    bot_thread = threading.Thread(target=run_bot)
-    bot_thread.start()
-    
-    # اجرای وب‌سرور در ترد اصلی (که باعث میشه برنامه زنده بمونه)
+# وب‌سرور Flask رو در یک ترد جداگانه اجرا می‌کنیم (چون به Signal نیاز نداره)
+def run_flask():
     app.run(host="0.0.0.0", port=8080)
+
+if name == "__main__":
+    # وب‌سرور رو در پس‌زمینه (Daemon) روشن می‌کنیم
+    flask_thread = threading.Thread(target=run_flask, daemon=True)
+    flask_thread.start()
+    
+    # ربات تلگرام رو در ترد اصلی (Main Thread) اجرا می‌کنیم
+    main.main()
