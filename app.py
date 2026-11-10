@@ -1,6 +1,6 @@
-from flask import Flask, request
+from flask import Flask
 import threading
-import main  # این فایل، همون main.py خودمونه
+import main
 
 app = Flask(__name__)
 
@@ -8,20 +8,14 @@ app = Flask(__name__)
 def home():
     return "Bot Web Server is Running!"
 
-# این بخش بعداً برای زرین‌پال استفاده میشه
-@app.route('/verify-payment')
-def verify_payment():
-    # فعلاً یه پیام ساده برمی‌گردونه
-    return "Payment Verification Page"
-
-# اجرای ربات تلگرام در یک ترد (Thread) جداگانه
 def run_bot():
+    # این خط دقیقاً همون کاری رو می‌کنه که main.py میکرد
     main.main()
 
-if __name__ == "__main__":
-    # ربات رو توی پس‌زمینه روشن کن
+if name == "__main__":
+    # اجرای ربات در یک ترد جداگانه
     bot_thread = threading.Thread(target=run_bot)
     bot_thread.start()
     
-    # وب‌سرور رو روی پورت 8080 روشن کن
+    # اجرای وب‌سرور در ترد اصلی (که باعث میشه برنامه زنده بمونه)
     app.run(host="0.0.0.0", port=8080)
