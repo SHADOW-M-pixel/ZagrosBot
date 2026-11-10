@@ -12,7 +12,7 @@ def home():
 def run_flask():
     app.run(host="0.0.0.0", port=8080)
 
-if name == "__main__":
+if __name__ == "__main__":
     # وب‌سرور رو در پس‌زمینه (Daemon) روشن می‌کنیم
     flask_thread = threading.Thread(target=run_flask, daemon=True)
     flask_thread.start()
